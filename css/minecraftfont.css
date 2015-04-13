@@ -1,0 +1,90 @@
+
+@font-face {
+    font-family: 'MinecraftiaRegular';
+    src: url('../fonts/minecraftia.eot');
+    src: url('../fonts/minecraftia.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/minecraftia.woff') format('woff'),
+         url('../fonts/minecraftia.ttf') format('truetype'),
+         url('../fonts/minecraftia.svg#MinecraftiaRegular') format('svg');
+    font-style: normal;
+}
+
+.minecraft-chat{
+	font-family: 'MinecraftiaRegular';
+	font-size: 14px;
+	font-weight: thin;
+	list-style: none;
+	color: #FFFFFF;
+	text-shadow: 2px 2px 0px #505050;
+}
+.minecraft-color-black{
+	color: #000;
+	text-shadow: 2px 2px 0px #000;
+}
+.minecraft-color-darkblue{
+	color: #00A;
+	text-shadow: 2px 2px 0px #00002A;
+}
+.minecraft-color-darkaqua{
+	color: #0AA;
+	text-shadow: 2px 2px 0px #002A2A;
+}
+.minecraft-color-aqua{
+	color: #5FF;
+	text-shadow: 2px 2px 0px #153F3F;
+}
+.minecraft-color-darkred{
+	color: #A00;
+	text-shadow: 2px 2px 0px #2A0000;
+}
+.minecraft-color-red{
+	color: #ff4949;
+	text-shadow: 2px 2px 0px #541e1e;
+}
+.minecraft-color-red{
+	color: #F55;
+	text-shadow: 2px 2px 0px #3F1515;
+}
+.minecraft-color-darkgreen{
+	color: #0A0;
+	text-shadow: 2px 2px 0px #002A;
+}
+.minecraft-color-indigo{
+	color: #55F;
+	text-shadow: 2px 2px 0px #15153F;
+}
+.minecraft-color-darkgrey{
+	color: #555;
+	text-shadow: 2px 2px 0px #151515;
+}
+.minecraft-color-grey{
+	color: #AAA;
+	text-shadow: 2px 2px 0px #2A2A2A;
+}
+.minecraft-color-green{
+	color: #5F5;
+	text-shadow: 2px 2px 0px #153F15;
+}
+.minecraft-color-purple{
+	color: #A0A;
+	text-shadow: 2px 2px 0px #2A002A;
+}
+.minecraft-color-orange{
+	color: #FA0;
+	text-shadow: 2px 2px 0px #2A2A00;
+}
+.minecraft-color-white{
+	color: #FFFFFF;
+	text-shadow: 2px 2px 0px #3F3F3F;
+}
+.minecraft-color-yellow{
+	color: #FF5;
+	text-shadow: 2px 2px 0px #3F3F15;
+}
+.minecraft-effect-bold{
+	font-weight: bold;
+}
+.minecraft-effect-italic{
+	font-style: italic;
+}
+
