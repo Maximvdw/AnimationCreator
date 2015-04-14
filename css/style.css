@@ -1,0 +1,63 @@
+body,html{
+	overflow: hidden;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	cursor: pointer;
+    outline: none;
+	height: 100%;
+}
+
+footer{
+	color: #131417;
+	text-shadow: 0px 1px 0px #35373D;
+	position: fixed;
+	bottom: 2px;
+	left: 20px;
+	font-size: 10px;
+}
+
+.btn:focus{
+	outline: none !important;
+}
+.buttons .glyphicon{
+	font-size: 28px;
+}
+.big-text{
+	font-size: 20px !important;
+}
+.black-input{
+	background-color: #1c1e22 !important;
+	color: white !important;
+}
+
+.selectable{
+	-webkit-touch-callout: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+	cursor: text;
+}
+#yaml{
+	height: 237px;
+	border: 0px;
+}
+#frames{
+    height: 300px;
+	overflow-x: hidden;
+}
+@media (max-width: 991px) {
+	footer{
+		 display: none !important;
+	}
+}
+@media (max-height: 599px) {
+	footer{
+		 display: none !important;
+	}
+}
