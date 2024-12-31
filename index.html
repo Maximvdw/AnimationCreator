@@ -1,198 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="en" ng-app="animationCreator">
 	<head>
-		<title>AnimationCreator v1.1.1</title>
+		<title>AnimationCreator v1.3.0</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-		<script src="js/jquery.mousewheel.min.js"></script>
-		
-		<!-- AngularJS -->
-		<script src="js/angularjs/angular.min.js"></script>
-		
-		<!-- Updater -->
-		<script src="js/updater.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-switch.css">
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/context.standalone.css">
-		<script src="bootstrap/js/bootstrap.min.js"></script>
-		<script src="bootstrap/js/bootstrap-switch.min.js"></script>
-		<script src="bootstrap/js/context.js"></script>
 		<!-- Minecraft font style -->
 		<link rel="stylesheet" type="text/css" href="css/minecraftfont.css">
-		<script src="js/minecraftfont.js"></script>
-		<script src="js/js-yaml.js"></script>
-		<script>
-			var clearInput = false;
-			$(window).resize(function() {
-				var bodyheight = $(document).height();
-				$("#frames").height((240 + (bodyheight - 600)) >= 240 ? (240 + (bodyheight - 600)) : 240);
-				$("#yaml").height((186 + (bodyheight - 600)) >= 186 ? (186 + (bodyheight - 600)) : 186);
-			});
-			$(document).ready(function(){
-				var bodyheight = $(document).height();
-				$("#frames").height((240 + (bodyheight - 600)) >= 240 ? (240 + (bodyheight - 600)) : 240);
-				$("#yaml").height((186 + (bodyheight - 600)) >= 186 ? (186 + (bodyheight - 600)) : 186);
-				$("#frameText").keyup(function(event){
-					if(event.keyCode == 13){
-						$("#addFrameButton").click();
-					}
-				});
-
-				initContextInput();
-				function initContextInput(){
-					context.init({preventDoubleContext: false});
-
-					context.settings({compress: true});
-					
-					context.attach('#frameText', [
-						{header: 'Frame options'},
-						{text: 'Insert color ...', subMenu: [
-							{header: 'Minecraft colors'},
-							{text: "Dark colors ...", subMenu: [
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&0Black')), action: function(e){$('#frameText').val($('#frameText').val() + "&0");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&1Dark blue')), action: function(e){$('#frameText').val($('#frameText').val() + "&1");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&2Dark green')), action: function(e){$('#frameText').val($('#frameText').val() + "&2");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&3Dark aqua')), action: function(e){$('#frameText').val($('#frameText').val() + "&3");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&4Dark red')), action: function(e){$('#frameText').val($('#frameText').val() + "&4");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&5Purple')), action: function(e){$('#frameText').val($('#frameText').val() + "&5");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&8Dark grey')), action: function(e){$('#frameText').val($('#frameText').val() + "&8");}}
-							]},
-							{text: "Light colors ...", subMenu: [
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&6Orange')), action: function(e){$('#frameText').val($('#frameText').val() + "&6");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&7Grey')), action: function(e){$('#frameText').val($('#frameText').val() + "&7");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&9Indigo')), action: function(e){$('#frameText').val($('#frameText').val() + "&9");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&aGreen')), action: function(e){$('#frameText').val($('#frameText').val() + "&a");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&bAqua')), action: function(e){$('#frameText').val($('#frameText').val() + "&b");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&cRed')), action: function(e){$('#frameText').val($('#frameText').val() + "&c");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&dPink')), action: function(e){$('#frameText').val($('#frameText').val() + "&d");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&eYellow')), action: function(e){$('#frameText').val($('#frameText').val() + "&e");}},
-								{text: convertToMinecraftChat(convertMinecraftTextToHTML('&fWhite')), action: function(e){$('#frameText').val($('#frameText').val() + "&f");}}
-							]}
-						]},
-						{text: 'Insert effect ...', subMenu: [
-							{header: 'Minecraft effects'},
-							{text: convertToMinecraftChat(convertMinecraftTextToHTML('&f&lBOLD')), action: function(e){$('#frameText').val($('#frameText').val() + "&l");}},
-							{text: convertToMinecraftChat(convertMinecraftTextToHTML('&f&oItalic')), action: function(e){$('#frameText').val($('#frameText').val() + "&o");}}
-						]},
-						{divider: true},
-						{text: (!clearInput ? "Clear input on enter" : "Keep input on enter") ,action: function(e){if (clearInput){ clearInput = false; }else{ clearInput = true;} context.destroy('#frameText'); initContextInput();}}
-					]);
-				}
-			});
-			'use strict';
-			var animationCreator = angular.module('animationCreator',[]);
-			animationCreator.controller('AnimationController',  ['$scope', '$sce','$interval', function ($scope,$sce,$interval) {
-			  $scope.animation = [];
-			  $scope.interval = 20;
-			  $scope.random = false;
-			  $scope.index = 0;
-			  $scope.yaml = "<font color='yellow'>text</font>: []<br><font color='yellow'>interval</font>: 20<br><font color='yellow'>random</font>: false";
-			  $scope.addFrame = function(){
-				var line = $('#frameText').val();
-				var frame = {
-					yaml: line,
-					html: convertMinecraftTextToHTML(line)
-				};
-				$scope.animation.push(frame);
-				$scope.updateYaml();
-				if (clearInput){
-					 $('#frameText').val("");
-				}
-			  };
-			  $scope.removeFrame = function(index){
-				$scope.animation.splice(index,1);
-				$scope.updateYaml();
-			  };
-			  $scope.moveUp = function(index){
-				if ((index-1) >= 0)
-					$scope.animation = $scope.animation.move(index,index-1);
-				$scope.updateYaml();
-			  };
-			  $scope.changeInterval = function(){
-				$scope.interval = $('#interval').val();
-				if (timer != null)
-					$interval.cancel(timer);
-				timer = $interval(animator, (1000/ 20) * $scope.interval);
-				$scope.updateYaml();
-			  };
-			  $scope.togglePause = function(){
-				if (timer == null){
-					$scope.start();
-				}else{
-					$scope.pause();
-				}
-			  };
-			  $scope.isRunning = function(){
-				if (timer == null){
-					return false;
-				}else{
-					return true;
-				}
-			  };
-			  $scope.updateYaml = function(){
-				$scope.yaml = "<font color='yellow'>text</font>: []<br><font color='yellow'>interval</font>: 20<br><font color='yellow'>random</font>: false";
-				if ($scope.animation.length > 0){
-					$scope.yaml = "<font color='yellow'>text</font>:<br>";
-					for (var i=0; i<$scope.animation.length; i++) {
-						$scope.yaml += "- <font color='red'>'" + $scope.animation[i].yaml + "'</font><br>";
-					}
-					$scope.yaml += "<font color='yellow'>interval</font>: " + $scope.interval + "<br>";
-					$scope.yaml += "<font color='yellow'>random</font>: false<br>";
-				}
-			  };
-			  $scope.delete = function(){
-				$scope.interval = 20;
-				$scope.animation = [];
-				$('#frameText').val("");
-				$('#preview-frame').text("");
-				$('#preview-animation').text("No animation");
-				$('#interval').val(20);
-				$scope.yaml = "<font color='yellow'>text</font>: []<br><font color='yellow'>interval</font>: 20<br><font color='yellow'>random</font>: false";
-			  };
-			  $scope.pause = function(){
-					$interval.cancel(timer);
-					timer = null;
-			  };
-			  $scope.start = function(){
-					timer = $interval(animator, (1000/ 20) * $scope.interval);
-			  };
-			  $scope.moveDown = function(index){
-				if ($scope.animation.length > (index+1))
-					$scope.animation = $scope.animation.move(index,index+1);
-				$scope.updateYaml();
-			  };
-			  $scope.toTrustedHTML = function( html ){
-				return $sce.trustAsHtml( html );
-			  };
-			  var timer = $interval(animator,(1000/ 20) * $scope.interval);
-			  function animator(){
-				if ($scope.index >= $scope.animation.length){
-					$scope.index = 0;
-				}
-				if ($scope.animation.length != 0){
-					var frame = $scope.animation[$scope.index];
-					$scope.index++;
-					$('#preview-animation').html(frame.html);
-				}else{
-					$('#preview-animation').html("No animation");
-				}
-			  }
-			}]);
-			Array.prototype.move = function (old_index, new_index) {
-				if (new_index >= this.length) {
-					var k = new_index - this.length;
-					while ((k--) + 1) {
-						this.push(undefined);
-					}
-				}
-				this.splice(new_index, 0, this.splice(old_index, 1)[0]);
-				return this; // for testing purposes
-			};
-		</script>
 	</head>
 	<body ng-controller="AnimationController">
 		<div class="jumbotron" style="padding-top: 20px;padding-bottom: 20px;">
@@ -234,7 +52,7 @@
 				<div class="panel panel-default" id="framePanel">
 				  <div class="panel-heading">Animation frames</div>
 				  <div class="panel-body mCustomScrollbar" id="frames" data-mcs-theme="dark">
-					<div class="row" style="" ng-repeat="frame in animation">
+					<div class="row" ng-repeat="frame in animation">
 						<div class="col-md-4" style="width: 160px;">
 							<div class="btn-group" role="group" aria-label="...">
 								<button ng-click="moveUp($index);" class="btn btn-success" ng-disabled="$first"><span class="glyphicon glyphicon-chevron-up"></span></button>
@@ -283,8 +101,19 @@
 				</div>
 			</div>
 		</div>
+		<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+		<script src="node_modules/jquery/dist/jquery.min.js"></script>
+		<script src="node_modules/jquery-mousewheel/jquery.mousewheel.js"></script>
+		<script src="js/angularjs/angular.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="bootstrap/js/bootstrap-switch.min.js"></script>
+		<script src="bootstrap/js/context.js"></script>
+		<script src="js/minecraftfont.js"></script>
+		<script src="node_modules/js-yaml/dist/js-yaml.min.js"></script>
+		<script src="js/app.js"></script>
+		<script>if (window.module) module = window.module;</script>
 		<footer>
-			&copy; Maxim Van de Wynckel (Maximvdw) - 2015
+			&copy; Maxim Van de Wynckel (Maximvdw) - 2024
 		</footer>
 	</body>
 </html>

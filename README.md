@@ -1,2 +1,2 @@
-# AnimationCreator 1.1.3
-Animation Creator for MVdW Plugins
+# AnimationCreator 1.3.0
+Animation Creator for FeatherBoard

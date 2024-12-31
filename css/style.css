@@ -1,17 +1,17 @@
-body,html{
+body, html {
 	overflow: hidden;
 	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	cursor: pointer;
-    outline: none;
+	outline: none;
 	height: 100%;
 }
 
-footer{
+footer {
 	color: #131417;
 	text-shadow: 0px 1px 0px #35373D;
 	position: fixed;
@@ -20,44 +20,51 @@ footer{
 	font-size: 10px;
 }
 
-.btn:focus{
+.btn:focus {
 	outline: none !important;
 }
-.buttons .glyphicon{
+
+.buttons .glyphicon {
 	font-size: 28px;
 }
-.big-text{
+
+.big-text {
 	font-size: 20px !important;
 }
-.black-input{
+
+.black-input {
 	background-color: #1c1e22 !important;
 	color: white !important;
 }
 
-.selectable{
+.selectable {
 	-webkit-touch-callout: text;
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 	cursor: text;
 }
-#yaml{
+
+#yaml {
 	height: 237px;
 	border: 0px;
 }
-#frames{
-    height: 300px;
+
+#frames {
+	height: 300px;
 	overflow-x: hidden;
 }
+
 @media (max-width: 991px) {
-	footer{
-		 display: none !important;
+	footer {
+		display: none !important;
 	}
 }
+
 @media (max-height: 599px) {
-	footer{
-		 display: none !important;
+	footer {
+		display: none !important;
 	}
 }
